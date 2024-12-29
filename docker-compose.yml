@@ -1,0 +1,28 @@
+services:
+  frontend:
+    image: frontend
+    build: ./bobble-dashboard
+    container_name: partner-dashboard
+    restart: always
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - mern-network
+
+  backend:
+    image: backend
+    build: ./server
+    container_name: partner-backend
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
